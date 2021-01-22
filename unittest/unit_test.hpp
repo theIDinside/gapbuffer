@@ -6,12 +6,16 @@
 #include <string>
 #include <vector>
 
+/// Really a bad name, this is meant to keep track of assertions within a unit test. For instance, we might be testing a specific function or feature, and really testing it might require
+/// running a whole *host* of iterations with varius edge cases (for instance search_test & search_from_test tests)
 struct SubTest {
     int test_id;
     bool success;
     std::string failMessage;
 };
 
+/// Requires &lt;string_view&gt; and &lt;filesystem&gt; to be included in the CU, and of course &lt;fmt/format.h&gt;
+// Requires <string_view> and <filesystem> to be included in the CU, and of course <fmt/format.h>
 #define BeginUnitTest()                             \
     auto p = std::filesystem::path{__FILE__};       \
     std::string fn_tmp_sig{__FUNCSIG__};            \
@@ -24,8 +28,11 @@ struct SubTest {
 
 class UnitTest {
 public:
+    /// takes function name, file location in the format of "file.cpp:lineNumber", and if test should abort the test run immediately on err
     UnitTest(std::string name, std::string fileLocStr, bool failImmediate);
     static UnitTest Test(std::string name, std::string fileLocStr, bool failImmediate = false);
+
+    /// Push a result, with the fail message which gets printed on error
     void push_result(std::string msg, bool result);
     ~UnitTest() noexcept(false);
 
