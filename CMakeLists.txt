@@ -35,8 +35,11 @@ endif()
 
 
 add_executable(gapbuffer main.cpp gb/gap_buffer.cpp gb/gap_buffer.hpp gb/movement.cpp gb/movement.hpp gb/text.cpp gb/text.hpp unittest/unit_test.cpp unittest/unit_test.hpp)
-
 add_executable(test_gapbuffer main.cpp gb/gap_buffer.cpp gb/gap_buffer.hpp gb/movement.cpp gb/movement.hpp gb/text.cpp gb/text.hpp unittest/unit_test.cpp unittest/unit_test.hpp)
+
+target_include_directories(test_gapbuffer PRIVATE ./unittest)
+target_include_directories(gapbuffer PRIVATE ./unittest)
+
 target_link_libraries(gapbuffer fmt)
 target_link_libraries(test_gapbuffer fmt)
 

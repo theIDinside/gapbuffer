@@ -7,7 +7,7 @@
 #include <gb/gap_buffer.hpp>
 #include <string>
 #include <string_view>
-#include <test/unit_test.hpp>
+#include <unittest/unit_test.hpp>
 #include <vector>
 
 using namespace fmt::literals;
