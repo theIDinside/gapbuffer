@@ -22,6 +22,10 @@ struct Gap {
 };
 
 
+template<typename C> concept PushbackContainer = requires(C c) {
+    c.push_back({});
+};
+
 /// Template for a function that takes a std::vector<char>&, char => fn(std::vector<char>& out, char ch_input);
 template<typename Fn> concept Collector = requires(Fn fn) {
     fn(std::declval<std::vector<char>&>(), char{});
@@ -155,6 +159,14 @@ public:
         const auto sz = size();
         for(auto i = 0; i < sz; i++) {
             fn(this->operator[](i));
+        }
+    }
+    template <typename Fn, PushbackContainer Container>
+    void transform(Container& container, Fn fn) {
+        auto& Self = *this;
+        const auto sz = size();
+        for(auto i = 0; i < sz; i++) {
+            fn(container, Self[i]);
         }
     }
 

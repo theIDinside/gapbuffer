@@ -90,7 +90,7 @@ void larger_insertion_test() {
             auto gb_contents = gb.collect_from(0, gb.size(), [](auto &vec, auto c) {
                 vec.push_back(c);
             });
-            gb_contents.push_back('\0');// c-string terminator
+            gb_contents.push_back('\0');// c-string terminator, so that we can call .data() on vector and pretend it's a string
             UnitTestPush(fmt::format(FMT_STRING("Contents do not match: {} != {}"), movement_header_data, gb_contents.data()), gb.debug_assert(movement_header_data, assertEqualsFn));
             SubUnitTest++;
         }
@@ -147,7 +147,7 @@ void gb_motions_test() {
     auto gb_contents = gb.collect_from(0, gb.size(), [](auto &vec, auto c) {
       vec.push_back(c);
     });
-    gb_contents.push_back('\0');// c-string terminator
+    gb_contents.push_back('\0');// c-string terminator, so that we can call .data() on vector and pretend it's a string
     UnitTestPush(fmt::format(FMT_STRING("Contents do not match: {} != {}"), after_edits, gb_contents.data()), gb.debug_assert(after_edits, assertEqualsFn));
 
 }
@@ -176,7 +176,7 @@ void insert_str_smaller_than_gap_test() {
             auto gb_contents = gb.collect_from(0, gb.size(), [](auto &vec, auto c) {
                 vec.push_back(c);
             });
-            gb_contents.push_back('\0');// c-string terminator
+            gb_contents.push_back('\0');// c-string terminator, so that we can call .data() on vector and pretend it's a string
             UnitTestPush(fmt::format(FMT_STRING("Contents do not match: {} != {}"), assert_result, gb_contents.data()), gb.debug_assert(assert_result, assertEqualsFn));
             SubUnitTest++;
         }
@@ -211,7 +211,7 @@ void remove_forward_backward_test() {
         auto gb_contents = gb.collect_from(0, gb.size(), [](auto &vec, auto c) {
             vec.push_back(c);
         });
-        gb_contents.push_back('\0');// c-string terminator
+        gb_contents.push_back('\0');// c-string terminator, so that we can call .data() on vector and pretend it's a string
         UnitTestPush(fmt::format(FMT_STRING("Contents do not match: {} != {}"), assert_result, gb_contents.data()), gb.debug_assert(assert_result, assertEqualsFn));
 
         gb.move_cursor_to(4);
@@ -222,7 +222,7 @@ void remove_forward_backward_test() {
         gb_contents = gb.collect_from(0, gb.size(), [](auto &vec, auto c) {
             vec.push_back(c);
         });
-        gb_contents.push_back('\0');// c-string terminator
+        gb_contents.push_back('\0');// c-string terminator, so that we can call .data() on vector and pretend it's a string
         UnitTestPush(fmt::format(FMT_STRING("Contents do not match: {} != {}"), assert_result2, gb_contents.data()), gb.debug_assert(assert_result2, assertEqualsFn));
     }
 }

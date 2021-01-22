@@ -30,6 +30,8 @@ class UnitTest {
 public:
     /// takes function name, file location in the format of "file.cpp:lineNumber", and if test should abort the test run immediately on err
     UnitTest(std::string name, std::string fileLocStr, bool failImmediate);
+
+    /// Factory function for UnitTest type, takes function name, file location in the format of "file.cpp:lineNumber", and if test should abort the test run immediately on err
     static UnitTest Test(std::string name, std::string fileLocStr, bool failImmediate = false);
 
     /// Push a result, with the fail message which gets printed on error
